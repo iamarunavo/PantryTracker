@@ -104,25 +104,27 @@ const handleSearch = (e) => {
     flexDirection="column"
     alignItems="center"
     gap={2}
-    bgcolor="#F5F5DC"
+    bgcolor="#F0F2F5"
+    sx={{
+    transition: 'all 0.3s ease-in-out',
+  }}
   >
 
-<Box
-        width="100%"
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        padding="20px"
-        boxShadow="0px 4px 12px rgba(0, 0, 0, 0.1)"
-        bgcolor="#FFA500"
-        border="2px solid #654321"
-        position="fixed"
-        top="0"
-        left="0"
-        
-
-      >
-        <Typography variant="h4" color="#654321">
+  <Box
+      width="100%"
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      padding="20px"
+      boxShadow="0px 4px 12px rgba(0, 0, 0, 0.1)"
+      bgcolor="#0066CC"
+      color="#FFFFFF"
+      borderRadius="0 0 8px 8px"
+      position="fixed"
+      top="0"
+      left="0"
+>
+        <Typography variant="h4" color="##FFFFFF">
           PantrySensei
         </Typography>
         <TextField
@@ -132,31 +134,22 @@ const handleSearch = (e) => {
           onChange={handleSearch}
           sx={{
             width: '300px',
+            backgroundColor: '#FFFFFF',
             borderRadius: '8px',
             boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+          }}
+          InputProps={{
+            style: {
+              padding: '10px',
+              fontSize: '16px',
+            },
           }}
         />
       </Box>
 
   <Modal open={open} onClose={handleClose}>
-    <Box
-      position="absolute" 
-      top="50%" 
-      left="50%"
-      transform="translate(-50%,-50%)"
-      width={400}
-      bgcolor="#F5F5DC"
-      border="2px solid #654321"
-      boxShadow={24}
-      p={4}
-      display="flex"
-      flexDirection="column"
-      gap={3}
-      sx={{
-        transform: 'translate(-50%,-50%)'
-      }}
-    >
-      <Typography variant="h6" color="#654321">Add Item</Typography>
+    <Box sx={style}>
+      <Typography variant="h6" color="#333333">Add Item</Typography>
       <Stack width="100%" direction="row" spacing={2}>
         <TextField
           variant='outlined'
@@ -164,6 +157,17 @@ const handleSearch = (e) => {
           value={itemName}
           onChange={(e)=>{
           setItemName(e.target.value)
+        }}
+        sx={{
+          backgroundColor: '#FFFFFF',
+          borderRadius: '8px',
+          border: '2px solid #0066CC'
+        }}
+        InputProps={{
+          style: {
+            padding: '10px',
+            fontSize: '16px',
+          },
         }}
         >
         </TextField>  
@@ -174,7 +178,16 @@ const handleSearch = (e) => {
           setItemName('')
           handleClose()   
          }}
-         sx={{ borderColor: '#6B8E23', color: '#6B8E23' }}
+         sx={{
+          backgroundColor: '#0066CC',
+          color: '#FFFFFF',
+          borderRadius: '8px',
+          padding: '10px 20px',
+          boxShadow: 'white',
+          '&:hover': {
+            backgroundColor: '#FFFFFF',
+          },
+        }}
          >
          Add
          </Button>    
@@ -182,65 +195,94 @@ const handleSearch = (e) => {
     </Box>
   </Modal>
 
-    <Box border='1px solid #FF7F50' width='800px'>
+    <Box 
+        border='1px solid #DDDDDD'
+        width='800px'
+        borderRadius="8px"
+        boxShadow="0px 4px 12px rgba(0, 0, 0, 0.1)"
+        overflow="hidden"
+        bgcolor="#FFFFFF">
       
     <Box
       width="100%"
       height="100px"
-      bgcolor="linear-gradient(45deg, #FF7F50, #FF6347)"
+      bgcolor="#0066CC"
       display="flex"
-      justifyContent="space-between"  // Distributes space between the text and button
-      alignItems="center"  // Vertically centers both the text and button
-      paddingLeft="20px"  // Adds padding to the left for the text
-      paddingRight="20px"  // Adds padding to the right for the button
+      justifyContent="space-between"
+      alignItems="center"
+      paddingLeft="20px"
+      paddingRight="20px"
       borderRadius="8px 8px 0 0"
+      color="#FFFFFF"
      >
-     <Typography variant={'h2'} color={'#333'}>
+     <Typography variant={'h2'} color={'#FFFFFF'}>
       Inventory
      </Typography>
      <Button
       variant="contained"
       onClick={() => setOpen(true)}
       sx={{
-      backgroundColor: '#6B8E23',
-      color: '#FFF',
-      borderRadius: '8px',
-      padding: '10px 20px',
-      boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-    }}
+        backgroundColor: '#005BB5',
+        color: '#FFFFFF',
+        borderRadius: '8px',
+        padding: '10px 20px',
+        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+        '&:hover': {
+          backgroundColor: '#004C99',
+        },
+      }}
      >
       Add New Item
      </Button>
     </Box>
 
       
-      <Stack width="800px" height="300px" spacing={2} overflow={'auto'}>
+      <Stack width="800px" height="300px" spacing={2} overflow={'auto'} bgcolor="#F0F2F5" padding="20px">
         {filteredInventory.map(({name, quantity}) => (
           <Box
             key={name}
             width="100%"
-            minHeight="150px"
-            display={'flex'}
-            justifyContent={'space-between'}
-            alignItems={'center'}
-            bgcolor={'#F5F5DC'}
-            padding={5}
-            border="1px solid #654321"
+            minHeight="100px"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            bgcolor="#FFFFFF"
+            padding="10px"
+            borderRadius="8px"
+            boxShadow="0px 4px 12px rgba(0, 0, 0, 0.05)"
+            transition="transform 0.2s ease-in-out"
+            sx={{
+            '&:hover': {
+              transform: 'scale(1.02)',
+            },
+          }}
           >
-            <Typography variant={'h3'} color={'#654321'} textAlign={'center'}>
+            <Typography variant={'h5'} color={'#333333'} textAlign={'center'}>
               {name.charAt(0).toUpperCase() + name.slice(1)}
             </Typography>
 
-            <Typography variant={'h3'} color={'#654321'} textAlign={'center'}>
+            <Typography variant={'h5'} color={'#333333'} textAlign={'center'}>
               Ct: {quantity}
             </Typography>
 
             <Stack direction="row" spacing={2}>
 
-            <Button variant="contained" onClick={() => addItem(name)} sx={{ borderColor: '#6B8E23', color: '#654321' }}>
+            <Button variant="contained" onClick={() => addItem(name)} sx={{
+                    borderColor: '#0066CC',
+                      color: '#FFFFFF',
+                    '&:hover': {
+                      borderColor: '#005BB5',
+                    },
+                  }}>
             Add
             </Button>
-            <Button variant="contained" onClick={() => removeItem(name)} sx={{ borderColor: '#6B8E23', color: '#654321' }}>
+            <Button variant="contained" onClick={() => removeItem(name)} sx={{
+                    borderColor: '#FF3333',
+                    color: '#FFFFFF',
+                    '&:hover': {
+                      borderColor: '#CC0000'
+                    },
+                  }}>
             Remove
             </Button>
 
